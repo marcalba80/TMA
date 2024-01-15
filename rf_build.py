@@ -11,6 +11,7 @@ from scipy.stats import randint
 # Tree Visualisation
 from sklearn.tree import export_graphviz
 from IPython.display import Image
+import matplotlib.pyplot as plt
 import graphviz
 
 # features = pd.read_csv('stateful_features-light_text.pcap.csv')\
@@ -43,4 +44,19 @@ rf.fit(train_features, train_labels)
 test_pred = rf.predict(test_features)
 
 accuracy = accuracy_score(test_labels, test_pred)
-print("Accuracy: ", accuracy)
+# print("Accuracy: ", accuracy)
+
+mat_confusion = confusion_matrix(
+                    y_true    = test_labels,
+                    y_pred    = test_pred
+                )
+
+print("-------------------")
+print("Confusion Mat")
+print("-------------------")
+print(mat_confusion)
+print("")
+print(f"Accuracy: {100 * accuracy} %")
+fig, ax = plt.subplots(figsize=(3, 3))
+ConfusionMatrixDisplay(mat_confusion).plot(ax=ax)
+plt.show()
