@@ -4,14 +4,7 @@ import numpy as np
 # Modelling
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-# from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, ConfusionMatrixDisplay
 from sklearn.model_selection import ParameterGrid, train_test_split
-# from scipy.stats import randint
-
-# # Tree Visualisation
-# from sklearn.tree import export_graphviz
-# from IPython.display import Image
-# import graphviz
 
 import multiprocessing, warnings
 
@@ -37,14 +30,14 @@ train_features, test_features, train_labels, test_labels = train_test_split(feat
 # Out-of-bag Score
 
 param_grid = ParameterGrid(
-                {'n_estimators': [150],
+                {'n_estimators': [50, 100, 150],
                  'max_features': [5, 7, 9],
                  'max_depth'   : [None, 3, 10, 20],
                  'criterion'   : ['gini', 'entropy']
                 }
             )
 
-# Loop adjust hyperparams
+# Concurrent adjust hyperparams
 # ==============================================================================
 def eval_oob_error(X, y, modelo, params, verbose=True):
     modelo.set_params(

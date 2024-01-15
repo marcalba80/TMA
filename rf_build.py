@@ -5,12 +5,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, ConfusionMatrixDisplay
-from sklearn.model_selection import RandomizedSearchCV, train_test_split
-from scipy.stats import randint
+from sklearn.model_selection import train_test_split
 
 # Tree Visualisation
-from sklearn.tree import export_graphviz
-from IPython.display import Image
 import matplotlib.pyplot as plt
 import graphviz
 
@@ -44,6 +41,8 @@ rf.fit(train_features, train_labels)
 test_pred = rf.predict(test_features)
 
 accuracy = accuracy_score(test_labels, test_pred)
+precision = precision_score(test_labels, test_pred)
+recall = recall_score(test_labels, test_pred)
 # print("Accuracy: ", accuracy)
 
 mat_confusion = confusion_matrix(
@@ -57,6 +56,9 @@ print("-------------------")
 print(mat_confusion)
 print("")
 print(f"Accuracy: {100 * accuracy} %")
+print(f"Precision: {100 * precision} %")
+print(f"Recall: {100 * recall} %")
+
 fig, ax = plt.subplots(figsize=(3, 3))
 ConfusionMatrixDisplay(mat_confusion).plot(ax=ax)
 plt.show()

@@ -1,5 +1,4 @@
-# TMA
-TMA Project DNS Tunneling Detection
+# TMA Project DNS Tunneling Detection
 
 DataSet
 
