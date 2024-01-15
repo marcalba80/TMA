@@ -10,18 +10,13 @@ import multiprocessing, warnings
 
 # features = pd.read_csv('stateful_features-light_text.pcap.csv')\
 features = pd.read_csv('featuresf.csv')\
-    .get(["rr_name_entropy", "rr_name_length", "malicious"])
+    # .get(["rr_name_entropy", "rr_name_length", "malicious"])
 # print(features)
 # print(features.head(5))
 
-# Labels are the values we want to predict
 labels = np.array(features['malicious'])
-# Remove the labels from the features
-# axis 1 refers to the columns
 features = features.drop('malicious', axis = 1)
-# Saving feature names for later use
 feature_list = list(features.columns)
-# Convert to numpy array
 features = np.array(features)
 
 # Split the data into training and testing sets
@@ -37,7 +32,7 @@ param_grid = ParameterGrid(
                 }
             )
 
-# Concurrent adjust hyperparams
+# Concurrently adjust hyperparams
 # ==============================================================================
 def eval_oob_error(X, y, modelo, params, verbose=True):
     modelo.set_params(
