@@ -1,6 +1,6 @@
 import csv
 
-with open('stateless_light-benign.csv', 'r') as input_file, open('stateless_light-benign.out.csv', 'w', newline='') as output_file:
+with open('benign.csv', 'r') as input_file, open('benign.out.csv', 'w', newline='') as output_file:
     # Create a CSV reader object
     reader = csv.reader(input_file)
     # Create a CSV writer object
@@ -17,7 +17,7 @@ with open('stateless_light-benign.csv', 'r') as input_file, open('stateless_ligh
         # Write the updated row to the output file
         writer.writerow(row)
         
-with open('stateless_light-text.csv', 'r') as input_file, open('stateless_light-text.out.csv', 'w', newline='') as output_file:
+with open('s_malicious.csv', 'r') as input_file, open('s_malicious.out.csv', 'w', newline='') as output_file:
     # Create a CSV reader object
     reader = csv.reader(input_file)
     # Create a CSV writer object
