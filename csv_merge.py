@@ -1,8 +1,8 @@
 import csv
 
-with open('stateful_light-text.out.csv', 'r') as input_file, \
-    open('stateful_light-benign.out.csv', 'r') as input_file2, \
-    open('featuresf.csv', 'w', newline='') as output_file:
+with open('stateless_light-text.out.csv', 'r') as input_file, \
+    open('stateless_light-benign.out.csv', 'r') as input_file2, \
+    open('featuresf_stateless.csv', 'w', newline='') as output_file:
     # Create a CSV reader object
     reader = csv.reader(input_file)
     reader2 = csv.reader(input_file2)

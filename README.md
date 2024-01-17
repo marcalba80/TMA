@@ -12,5 +12,5 @@ Using the following features:
 2. entropy of resource record name
 3. unique country
 4. ratio of repeated characters
-5. probability from CNN(Convulsive Neural Network)
+5. probability from CNN(Convolutional Neural Network)
 6.
