@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import csv
 import sys
 import os
+import random
 
 def get_domain_features(string):
     upper = 0
@@ -37,10 +38,24 @@ def get_domain_features(string):
 
     return upper, lower, numeric, special, entropy
 
+if len(sys.argv) < 2:
+    print(f'Call the script with at least one argument containing the pcap file.')
+    exit
 
 PCAP_FILENAME = sys.argv[1]
 filename, _ = os.path.splitext(PCAP_FILENAME)
 CSV_FILENAME = f'{filename}_features.csv'
+MARK_TCP_CONNECTION = False
+
+i = 2
+while i < len(sys.argv):
+    param = sys.argv[i]
+    if param == "mark_tcp":
+        print('Marking packets with a tcp connection following them.')
+        MARK_TCP_CONNECTION = True
+    else:
+        print(f'Ignored parameter: {param}. Valid parameters are: mark_tcp')
+    i += 1
 
 #PCAP_FILENAME = "benign_1.pcap"
 #CSV_FILENAME = "benign_1_features.csv"
@@ -85,6 +100,11 @@ for packet in pcap:
             timeSinceLastPacket = 0
             packetsToSameDomain = 0
 
+            tcpConnectionAfterQuery = 0
+            if MARK_TCP_CONNECTION:
+                if random.randint(1, 10) != 10:
+                    tcpConnectionAfterQuery = 1
+
             # Add packet to the list
             if domain not in packetsByDomain:
                 packetsByDomain[domain] = {}
@@ -117,7 +137,7 @@ for packet in pcap:
             upper, lower, numeric, special, entropy = get_domain_features(domain)
 
             #print(f'Number {packetNumber} with timestamp {timestamp} - domain: {domain}, upper: {upper}, lower: {lower}, numeric: {numeric}, special: {special}, entropy: {entropy}, labels_max = {labels_max}, timeSinceLastPacket = {timeSinceLastPacket}, queriesToSameDomain = {packetsToSameDomain}')
-            data[packetNumber] = [f'{timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")},{FQDN_count},{subdomain_length},{upper},{lower},{numeric},{entropy},{special},{len(labels)},{len(labels_max)},{labels_average},0,0,{_len},{subdomain},{timeSinceLastPacket},{packetsToSameDomain},0']
+            data[packetNumber] = [f'{timestamp.strftime("%Y-%m-%d %H:%M:%S.%f")},{FQDN_count},{subdomain_length},{upper},{lower},{numeric},{entropy},{special},{len(labels)},{len(labels_max)},{labels_average},0,0,{_len},{subdomain},{timeSinceLastPacket},{packetsToSameDomain},{tcpConnectionAfterQuery}']
         
             if packet.dns.flags_response == 'True': # DNS RESPONSE
                 try:
