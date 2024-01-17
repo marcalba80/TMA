@@ -4,14 +4,7 @@ DataSet
 
 DataSet Preprocessing
 
-Random Forest Tree implementation
-Using the following features:
-1. record name length
-2. entropy of resource record name
-3. unique country
-4. ratio of repeated characters
-5. probability from CNN(Convolutional Neural Network)
-6.
+Random Forest Tree with XGBoost
 
 Structure
 /Datasets
