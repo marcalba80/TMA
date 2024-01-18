@@ -19,6 +19,8 @@ from rf_hyperparams import get_hparams
 
 import os, warnings, sys
 
+warnings.filterwarnings('ignore')
+
 # features = pd.read_csv('featuresf.csv')\
     # .get(["rr_name_entropy", "rr_name_length", "malicious"])
 # features = pd.read_csv('featuresff.csv')\
@@ -39,8 +41,6 @@ except:
 
 feature_list = list(features.columns)
 # features = np.array(features)
-
-# warnings.filterwarnings('ignore')
 
 train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 123)
 

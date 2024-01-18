@@ -67,7 +67,7 @@ def get_hparams():
                     eval_oob_error,
                     [(train_features, train_labels, RandomForestClassifier(), params) for params in param_grid]
                 )
-    warnings.filterwarnings('default')
+    # warnings.filterwarnings('default')
 
     results = pd.DataFrame(results)
     results = pd.concat([results, results['params'].apply(pd.Series)], axis=1)
